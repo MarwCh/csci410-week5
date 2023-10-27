@@ -9,6 +9,18 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  // the first image to be displayed when we run the application
+  String image = 'assets/image1.jpg';
+  // add a list of image assets
+  List<String> images = [
+    'assets/image1.jpg',
+    'assets/image2.jpg',
+    'assets/image3.jpg',
+    'assets/image4.png'
+  ];
+  // a static counter to keep track of which image will be displays when we press the button
+  static int count = 0;
+
   String _text = '';
   double _x = -1, _y = -1;
 
@@ -20,6 +32,10 @@ class _HomeState extends State<Home> {
       else {
         _text = (_x + _y).toString();
       }
+      // set new image from the images list using counter as index
+      image = images[count];
+      // update counter so that it doesn't exceed list length - 1
+      count = (count + 1) % images.length;
     });
   }
 
@@ -58,7 +74,8 @@ class _HomeState extends State<Home> {
               const SizedBox(height: 20.0),
               MyTextField(f: updateY, hint: 'Enter Y'),
               const SizedBox(height: 20.0),
-              ElevatedButton(onPressed: () {updateText();}, child: Text('SUM', style: TextStyle(fontSize: 24.0),))
+              ElevatedButton(onPressed: () {updateText();}, child: const Text('SUM', style: TextStyle(fontSize: 24.0),)),
+              Image.asset(image, width: 250.0, height: 250.0)
             ],
           ),
         )
@@ -68,10 +85,10 @@ class _HomeState extends State<Home> {
 
 class MyTextField extends StatelessWidget {
 
-  Function(String) f;
-  String hint;
+  final Function(String) f;
+  final String hint;
 
-  MyTextField({required this.hint, required this.f, super.key,});
+  const MyTextField({required this.hint, required this.f, super.key,});
 
   @override
   Widget build(BuildContext context) {
