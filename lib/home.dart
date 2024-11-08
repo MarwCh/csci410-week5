@@ -75,7 +75,7 @@ class _HomeState extends State<Home> {
               MyTextField(f: updateY, hint: 'Enter Y'),
               const SizedBox(height: 20.0),
               ElevatedButton(onPressed: () {updateText();}, child: const Text('SUM', style: TextStyle(fontSize: 24.0),)),
-              Image.asset(image, width: 250.0, height: 250.0)
+              Expanded(child: Image.asset(image, width: 250.0, height: 250.0))
             ],
           ),
         )
